@@ -1,0 +1,6 @@
+{
+	"msgList": [
+		{ "id" : 0, "message" : "text1", "completet" : "test"  },
+		{ "id" : 1, "message" : "text2", "completet" : "testa"  }
+	]
+}

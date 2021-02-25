@@ -3,11 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import CConsole from './CConsole';
+import Requester from './requester/Requester.js';
+import ServerConnector from './ServerConnector.js';
+import {Route,BrowserRouter,Switch} from "react-router-dom";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <App />,
   document.getElementById('root')
 );
 

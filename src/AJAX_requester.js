@@ -32,7 +32,8 @@ class AJAX_requester {
         this.state = {
             error : null,
             isLoaded : false,
-            message : [] 
+            isLoading : false,
+            message : []
         };
     }
     //componentDidMount() {
@@ -49,22 +50,17 @@ class AJAX_requester {
         if(type == "GET") {
             fetch(request)
                 .then(res => res.json())
-                .then(this.message = null)
+                .then(this.state.isLoading = true)
                 .then(
                     json => {
-                      this.isLoaded = true;
-                      this.message = json;
-                      /*
-                        this.setState({
-                            isLoaded : true,
-                            isLoading : false,
-                            message : json
-                        });
-                      */
+                      this.state.isLoaded = true;
+                      this.state.isLoading = false;
+                      this.state.message = json;
                     },
                     (error) => {
-                      this.isLoaded = false;
-                      this.error = error;
+                      this.state.isLoaded = false;
+                      this.state.isLoading = false;
+                      this.state.error = error;
                     }
                 )
                 .then(
@@ -103,14 +99,16 @@ class AJAX_requester {
     }
     GetArray() {
       if(this.state.isLoaded) {
-        console.log("getting array");
-        console.log(this.state.message);
-        if(this.state.message["jsonFile"]["list"] != null)
-       // var res = this.state.message["jsonFile"]["list"];
-        var res = Array.from(this.state.message["jsonFile"]["list"]);
-        console.log(this.state.message);
-        console.log("res is: " + res);
-        return res;
+        console.log("file is loaded: ok to get array");
+        if(this.state.message["jsonFile"]["list"] != null) {
+          console.log("array is not null: ok to get obj");
+          var res = Array.from(this.state.message["jsonFile"]["list"]);
+          return res;
+        } else {
+          console.log("array is null: bad to get obj");
+        } 
+      } else {
+        console.log("file is not loaded: bad to get array");
       }
     }
 }

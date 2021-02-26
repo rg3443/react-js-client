@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-class Requester extends React.Component {
+class SimpleRequester extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -12,7 +12,7 @@ class Requester extends React.Component {
 		axios.get('http://192.168.16.163/foo')
 			.then((response) => {
 			this.setState({
-				data: response // maninpulate your response here
+				data: response // maninpulate response here
 			})	
 		});
 	}
@@ -23,4 +23,4 @@ class Requester extends React.Component {
 	}
 };
 
-export default Requester;
+export default SimpleRequester;

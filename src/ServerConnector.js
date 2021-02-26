@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import axios from 'axios';
 
+// axios test
 class ServerConnector { 
 	constructor() {
 		this.state = {

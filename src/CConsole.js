@@ -2,12 +2,14 @@ import React from 'react';
 import logo from './logo.svg';
 import CMsgBox from './CMsgBox';
 import CMsgTextArea from './CMsgTextArea';
-import ServerConnector from './ServerConnector.js'
-import CMsg from './CMsg';
+import ServerConnector from './ServerConnector.js';
 import './CConsole.css';
 import AJAX_requester from './AJAX_requester.js';
 import CClock from './CClock.js';
 import CButton from './CButton.js';
+import Paper from '@material-ui/core/Paper';
+import VirtualizedTable from './CVirtualizedTable.js';
+import CVirtualizedTable from './CVirtualizedTable.js';
 
 function _debug(str,isdeb) {
 	if(isdeb) {
@@ -38,7 +40,7 @@ class CConsole extends React.Component {
 		this.setState({
 			msgList : this.requester.GetArray()
 		});
-		this.timer = setInterval(() => this.tick(), 1000);
+		this.timer = setInterval(() => this.tick(), 5000);
 	}
 	componentWillUnmount() {
 		clearTimeout(this.timer);
@@ -49,7 +51,18 @@ class CConsole extends React.Component {
 	
 	//update data methods
 	UpdateMsgBox() {
+		console.log('updating ms list...');
+		if(!this.requester.IsLoading())
+		this.requester.SendRequest("GET","http://192.168.16.163:8080/msg-list");
 		
+		var jsona = this.requester.GetJson();
+		console.log(this.requester.GetArray());
+		var arr = this.requester.GetArray();
+		this.setState({
+			msgList : arr
+		});
+		
+		/*
 		if(this.requester.GetJson() != null)
 		this.requester.SendRequest("GET","http://192.168.16.163:8080/msg-list")
 		console.log(this.requester.GetJson());
@@ -61,6 +74,7 @@ class CConsole extends React.Component {
 		this.setState({
 			msgList : Array.from(jsona["jsonFile"]["list"])
 		});
+		*/
 	}
  
 	
